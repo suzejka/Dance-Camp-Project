@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test_MVC.Data;
 
@@ -11,9 +12,10 @@ using Test_MVC.Data;
 namespace Test_MVC.Migrations
 {
     [DbContext(typeof(CampDbContext))]
-    partial class CampDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220619125555_sponsoring")]
+    partial class sponsoring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace Test_MVC.Migrations
 
                     b.HasIndex("ParticipantsId");
 
-                    b.ToTable("EventPerson", (string)null);
+                    b.ToTable("EventPerson");
                 });
 
             modelBuilder.Entity("ShowTrainer", b =>
@@ -49,7 +51,7 @@ namespace Test_MVC.Migrations
 
                     b.HasIndex("TrainersId");
 
-                    b.ToTable("ShowTrainer", (string)null);
+                    b.ToTable("ShowTrainer");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Camera", b =>
@@ -69,7 +71,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Camera", (string)null);
+                    b.ToTable("Camera");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.CameraUsage", b =>
@@ -92,7 +94,7 @@ namespace Test_MVC.Migrations
 
                     b.HasIndex("CameraOperatorId");
 
-                    b.ToTable("CameraUsage", (string)null);
+                    b.ToTable("CameraUsage");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Event", b =>
@@ -116,7 +118,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Event", (string)null);
+                    b.ToTable("Event");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Event");
                 });
@@ -134,7 +136,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Show", (string)null);
+                    b.ToTable("Show");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Person", b =>
@@ -178,7 +180,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Person", (string)null);
+                    b.ToTable("Person");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Person");
                 });
@@ -209,7 +211,7 @@ namespace Test_MVC.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Room", b =>
@@ -230,7 +232,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Room", (string)null);
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Shop", b =>
@@ -251,7 +253,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shop", (string)null);
+                    b.ToTable("Shop");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Sponsor", b =>
@@ -268,7 +270,7 @@ namespace Test_MVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sponsor", (string)null);
+                    b.ToTable("Sponsor");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.SponsorOpenEvent", b =>
@@ -294,7 +296,7 @@ namespace Test_MVC.Migrations
 
                     b.HasIndex("SponsorId");
 
-                    b.ToTable("SponsorOpenEvents", (string)null);
+                    b.ToTable("SponsorOpenEvent");
                 });
 
             modelBuilder.Entity("TrainerTraining", b =>
@@ -309,7 +311,7 @@ namespace Test_MVC.Migrations
 
                     b.HasIndex("TrainingsId");
 
-                    b.ToTable("TrainerTraining", (string)null);
+                    b.ToTable("TrainerTraining");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Open_Event", b =>

@@ -17,10 +17,6 @@ namespace Test_MVC.Data
         public static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder => {
             builder.AddConsole();
         });
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-        }
 
         public DbSet<Camera> Camera { get; set; }
         public DbSet<Person> Person { get; set; }
@@ -30,6 +26,10 @@ namespace Test_MVC.Data
         public DbSet<Organiser> Organiser { get; set; }
         public DbSet<Shop> Shop { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Sponsor> Sponsor { get; set; }
+        public DbSet<Event> Event { get; set; }
+        public DbSet<Open_Event> Open_Events { get; set; }
+        public DbSet<SponsorOpenEvent> SponsorOpenEvents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -37,13 +37,19 @@ namespace Test_MVC.Data
 
             builder.Entity<Shop>()
             .HasMany(s => s.Products)
-            .WithOne(s => s.Shop)
-            .OnDelete(DeleteBehavior.SetNull);
+            .WithOne(s => s.Shop);
 
             builder.Entity<Camera>()
             .HasMany(c => c.CameraUsages)
-            .WithOne(c => c.Camera)
-            .OnDelete(DeleteBehavior.SetNull);
+            .WithOne(c => c.Camera);
+
+            builder.Entity<Sponsor>()
+            .HasMany(s => s.SponsorOpenEvents)
+            .WithOne(s => s.Sponsor);
+
+            builder.Entity<Open_Event>()
+            .HasMany(c => c.SponsorOpenEvents)
+            .WithOne(c => c.OpenEvent);
         }
     }
 }

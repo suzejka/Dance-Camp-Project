@@ -6,5 +6,9 @@
         public int MaxAmountOfPeople { get; set; }
         public virtual ICollection<SponsorOpenEvent> SponsorOpenEvents { get; set; }
 
+        public Open_Event()
+        {
+            SponsorOpenEvents = new HashSet<SponsorOpenEvent>();
+        }
     }
 }

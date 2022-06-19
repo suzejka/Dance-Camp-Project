@@ -1,0 +1,37 @@
+﻿@model Test_MVC.Models.Sponsor
+
+@{
+    ViewData["Title"] = "Sponsorowane wydarzenia";
+    IEnumerable<Open_Event> openEvents = ViewBag.OpenEvents as IEnumerable<Open_Event>;
+}
+
+<h1>Sponsorowane przez @Model.Name</h1>
+
+<table id="openEventsTable" class="hover display">
+    <thead>
+        <tr>
+            <th>
+               Nazwa wydarzenia
+            </th>
+            <th>
+                Przekazana kwota
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var e in ViewBag.SponsorOpenEvents as List<SponsorOpenEvent>) {
+        <tr>
+            <td>
+                @e.OpenEvent.Name <a asp-controller="Open_Event" asp-action="Details" asp-route-id="@e.OpenEvent.Id"><img src='~/details.svg' width="16" height="16"></a>
+            </td>
+            <td>
+                @e.AmountReceivedFromSponsors
+            </td>
+      </tr>
+    }
+    </tbody>
+</table>
+
+<div style="margin-top: 15px">
+    <a class="btn btn-primary-regular" asp-action="Index">Wróć do listy sponsorów</a>
+</div>

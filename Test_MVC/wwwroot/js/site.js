@@ -87,3 +87,17 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $('#openEventsTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        "info": false,
+        dom: '<"top"f>rt<"bottom"p><"clear">',
+        "pageLength": 5,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pl.json"
+        }
+    });
+});
