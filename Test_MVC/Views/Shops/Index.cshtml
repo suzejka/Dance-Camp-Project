@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Test_MVC.Models.Shop>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Sklepy</h1>
+
+<table id="shopsTable" class="hover display">
+    <thead>
+        <tr>
+            <th>
+               Nazwa
+            </th>
+            <th>
+                Opis
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name) <a asp-action="Edit" asp-route-id="@item.Id"><img src='~/pen.svg'/></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a class="btn btn-primary-regular" asp-action="Details" asp-route-id="@item.Id">Produkty</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">X</a>
+            </td>
+      </tr>
+}  
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary-regular" asp-action="Create">Dodaj nowy sklep</a>
+</p>

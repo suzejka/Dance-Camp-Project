@@ -1,0 +1,104 @@
+﻿@*@using MultipleModelInOneView;*@
+@{
+    ViewBag.Title = "Home Page";
+}
+<h2>@ViewBag.Message</h2>
+@{
+
+   IEnumerable<Trainer> trainers = ViewData["Trainers"] as IEnumerable<Trainer>;
+   IEnumerable<Operator> operators = ViewData["Operators"] as IEnumerable<Operator>;
+   IEnumerable<Organiser> organisers = ViewData["Organisers"] as IEnumerable<Organiser>;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+      <ul class="nav nav-tabs" id="myNavTabs">
+      <li class="active"><a href="#trainersTab" data-toggle="tab">Trenerzy</a>
+      <li><a href="#navtabs2" data-toggle="tab">Operatorzy</a>
+      <li><a href="#navtabs3" data-toggle="tab">Organizatorzy</a>
+       
+
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="trainersTab">
+            <table id="trainersTable" class="table">
+                 <thead>
+                    <tr>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Kontakt</th>
+                        <th>Ilość treningów</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    @foreach (Trainer trainer in trainers)
+                    {
+                        <tr>
+                            <td>@trainer.Name</td>
+                            <td>@trainer.Surname</td>
+                            <td>@trainer.ContactDetails</td>
+                            <td>@trainer.ContactDetails</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="navtabs2">
+              <table id="operatorsTable" class="table">
+                  <thead>
+                    <tr>
+                        <th>Imie</th>
+                        <th>Nazwisko</th>
+                        <th>Kontakt</th>
+                        <th>Numer licencji</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (Operator operatorPerson in operators)
+                {
+                    <tr>
+                        <td>@operatorPerson.Name</td>
+                        <td>@operatorPerson.Surname</td>
+                        <td>@operatorPerson.ContactDetails</td>
+                        <td>@operatorPerson.LicenceNumber</td>
+                    </tr>
+                }
+                <tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="navtabs3">
+           <table id="organisersTable">
+                <tr>
+                    <th>Imie</th>
+                    <th>Nazwisko</th>
+                    <th>Kontakt</th>
+                    <th>Sektor</th>
+                </tr>
+                @foreach (Organiser organiser in organisers)
+                {
+                    <tr>
+                        <td>@organiser.Name</td>
+                        <td>@organiser.Surname</td>
+                        <td>@organiser.ContactDetails</td>
+                        <td>@organiser.WorkSector</td>
+                    </tr>
+                }
+            </table>
+            </div>
+        </div>
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@model Test_MVC.Models.Person
+@{
+    ViewData["Title"] = "Rejestrowanie nowego uczestnika";
+    IEnumerable<Person> participants = ViewData["Participants"] as IEnumerable<Person>;
+}
+
+<h1>Dodawanie nowego uczestnika</h1>
+
+<hr />
+<div class="row">
+    <div>
+        <form asp-action="Create">
+            <div class="column col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Imię</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Surname" class="control-label">Nazwisko</label>
+                    <input asp-for="Surname" class="form-control" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactDetails" class="control-label">Dane kontaktowe<div>*</div></label>
+                    <input asp-for="ContactDetails" class="form-control" />
+                    <span asp-validation-for="ContactDetails" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="column col-md-4">
+                <div class="form-group">
+                    <label asp-for="DormitoryNumber" class="control-label">Numer akademika</label>
+                    <input asp-for="DormitoryNumber" class="form-control" />
+                    <span asp-validation-for="DormitoryNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomNumber" class="control-label">Numer pokoju</label>
+                    <input asp-for="RoomNumber" class="form-control" />
+                    <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomNumber" class="control-label"></label>
+                    <input asp-for="RoomNumber" class="form-control" />
+                    <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                </div>           
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Powrót do listy uczestników</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

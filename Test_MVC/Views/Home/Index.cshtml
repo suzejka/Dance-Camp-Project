@@ -1,0 +1,200 @@
+﻿@{
+    ViewData["Title"] = "Strona główna";
+}
+
+<style>
+.widget {
+    background: #fff;
+    margin-bottom: .75rem;
+    display: block;
+    position: relative;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+.widget .widget-header,
+.widget-reminder-content,
+.widget-reminder-time,
+a.widget-header-title {
+    padding: 0.625rem;
+}
+.widget-chat-message:after,
+.widget-chat-message:before,
+.widget-reminder-container:after,
+.widget-reminder-container:before {
+    display: table;
+    content: "";
+    clear: both;
+}
+.widget-footer.with-border,
+.widget-reminder-container + .widget-reminder-container {
+    border-top: 1px solid #efeff4;
+}
+.widget-footer.with-bg,
+.widget-header.with-bg {
+    background: #efeff4;
+}
+.widget-header.with-border {
+    border-bottom: 1px solid #efeff4;
+}
+.widget-reminder-header {
+    background: #bb152f;
+    padding: 0.625rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    color: #fff;
+}
+.widget-reminder-container {
+    position: relative;
+}
+.inverse-mode .widget-reminder-container + .widget-reminder-container {
+    border-color: #333;
+}
+.inverse-mode .widget-reminder-header {
+    background: #212121;
+}
+.widget-reminder-time {
+    width: 5rem;
+    float: left;
+    text-align: right;
+    font-size: 0.625rem;
+}
+.widget-reminder-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5rem;
+    width: 0.125rem;
+    background: #efeff4;
+}
+.widget-reminder-content {
+    margin-left: 5.125rem;
+}
+.widget-header-title {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.widget .widget-title, .widget .widget-title a {
+    font-size: .75rem;
+    color: #000;
+    line-height: 1rem;
+}
+.widget .widget-title {
+    font-weight: 600;
+    margin: 0;
+}
+.widget-desc, .widget-desc a {
+    font-size: .6875rem;
+    line-height: 1rem;
+    color: #8A8A8F;
+    font-weight: 500;
+}
+.img-circle {
+    border-radius: 50%;
+}
+
+.pull-left {
+    float: left!important;
+}
+.pull-right {
+    float: right!important;
+}
+.m-t-15 {
+    margin-top: 15px!important;
+}
+
+.m-r-5 {
+    margin-right: 5px!important;
+}
+
+.widget .widget-header, .widget-reminder-content, .widget-reminder-time, a.widget-header-title {
+    padding: .625rem;
+}
+</style>
+
+<div class="text-center">
+    <div class="text-center">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="widget widget-reminder">
+                <div class="widget-reminder-header">DZISIAJ (@ViewBag.Today)</div>
+                <div class="widget-reminder-container">
+                    <div class="widget-reminder-time">
+                        09:00<br />
+                        10:30
+                    </div>
+                    <div class="widget-reminder-divider bg-black"></div>
+                    <div class="widget-reminder-content">
+                        <h4 class="widget-title">Trening Aleksandry Papiór</h4>
+                        <div class="widget-desc"><i class="fa fa-map-pin"></i> Sala Drewniana</div>
+                    </div>
+                </div>
+                <div class="widget-reminder-container">
+                    <div class="widget-reminder-time">
+                        11:00<br />
+                        13:00
+                    </div>
+                    <div class="widget-reminder-divider bg-danger"></div>
+                    <div class="widget-reminder-content">
+                        <h4 class="widget-title">Trening Macieja Kowalskiego</h4>
+                        <div class="widget-desc"><i class="fa fa-map-pin"></i> Sala Tenisowa</div>
+                    </div>
+                </div>
+                <div class="widget-reminder-container">
+                    <div class="widget-reminder-time">
+                        15:00<br />
+                        16:30
+                    </div>
+                    <div class="widget-reminder-divider bg-black"></div>
+                    <div class="widget-reminder-content">
+                        <h4 class="widget-title"> Trening Olafa Zielińskiego</h4>
+                        <div class="widget-desc"><i class="fa fa-map-pin"></i> Sala Tenisowa</div>
+                    </div>
+                </div>
+                <div class="widget-reminder-container">
+                    <div class="widget-reminder-time">
+                        00:00<br />
+                        00:30
+                    </div>
+                    <div class="widget-reminder-divider bg-danger"></div>
+                    <div class="widget-reminder-content">
+                        <h4 class="widget-title">Update systemu</h4>
+                        <div class="widget-desc"><i class="fa fa-map-pin"></i> Serwerownia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5">
+            <div class="widget widget-reminder">
+                <div class="widget-reminder-header">JUTRO (@ViewBag.Tomorrow)</div>
+                <div class="widget-reminder-container">
+                    <div class="widget-reminder-time">
+                        09:00<br />
+                        12:00
+                    </div>
+                    <div class="widget-reminder-divider bg-danger"></div>
+                    <div class="widget-reminder-content">
+                        <h4 class="widget-title">Trening Olafa Zielińskiego</h4>
+                        <div class="widget-desc"><i class="fa fa-map-pin"></i> Sala Tenisowa</div>
+                    </div>
+                </div>
+                <div class="widget-reminder-container">
+                    <div class="widget-reminder-time">
+                        20:00<br />
+                        23:00
+                    </div>
+                    <div class="widget-reminder-divider bg-black"></div>
+                    <div class="widget-reminder-content">
+                        <h4 class="widget-title">Beatbox Night</h4>
+                        <div class="widget-desc"><i class="fa fa-map-pin"></i> Sala Tenisowa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>

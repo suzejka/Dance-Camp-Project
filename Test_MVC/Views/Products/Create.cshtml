@@ -1,0 +1,55 @@
+﻿@model Test_MVC.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+    IEnumerable<Shop> shops = ViewBag.Shops as IEnumerable<Shop>;
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cena</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Zdjęcie</label>
+                <input asp-for="PhotoURL" class="form-control" />
+                <span asp-validation-for="PhotoURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Sklep, w którym sprzedawany jest produkt</label>
+                <select asp-for="Shop" class="form-select" aria-label="Wybierz sklep">
+                    @foreach(var s in shops)
+                    {
+                         <option value="@s.Id">@s.Name</option>
+                    }
+                </select>
+                <input asp-for="Shop" type="hidden" name="shop" id="shop" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,117 @@
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    background: #fafafa;
+    margin-top: 20px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #ffffff;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav a:hover {
+            color: #da0a0a;
+        }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: white;
+    }
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+.hamburger_menu {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.logo {
+    float: right;
+    display: block;
+    margin-right: 6px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 35px;
+    width: 100%;
+}
+
+.nav-tabs > li > a {
+    background-color: #bb152f;
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+a, a:hover, a:visited, a:focus {
+    text-decoration: none;
+}
+
+.btn-primary-regular {
+    color: #fff;
+    background-color: black;
+    border-color: black;
+}
+
+.btn-primary-regular:hover {
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+
+    .btn-check:focus + .btn-primary-regular-regular, .btn-primary-regular:focus {
+        color: #fff;
+        background-color: black;
+        border-color: black;
+        box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-check:checked + .btn-primary-regular, .btn-check:active + .btn-primary-regular, .btn-primary-regular:active, .btn-primary-regular.active, .show > .btn-primary-regular.dropdown-toggle {
+        color: #fff;
+        background-color: black;
+        border-color: black;
+    }
+
+        .btn-check:checked + .btn-primary-regular:focus, .btn-check:active + .btn-primary-regular:focus, .btn-primary-regular:active:focus, .btn-primary-regular.active:focus, .show > .btn-primary-regular.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.5);
+        }
+
+    .btn-primary-regular:disabled, .btn-primary-regular.disabled {
+        color: #fff;
+        background-color: black;
+        border-color: black;
+    }
+
+/*-----------------------*/
+

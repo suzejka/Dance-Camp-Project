@@ -1,0 +1,43 @@
+﻿@model Test_MVC.Models.Person
+
+@{
+    ViewData["Title"] = "Uczestnicy";
+    IEnumerable<Person> participants = ViewData["Participants"] as IEnumerable<Person>;
+}
+
+
+<h1>Uczestnicy</h1>
+
+<p>
+    <a class="btn btn-primary-regular" asp-action="Create">Zarejestruj nowego uczestnika</a>
+</p>
+<table id="participantsTable" class="table">
+    <thead>
+        <tr>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Kontakt</th>
+            <th>Numer akademika</th>
+            <th>Numer pokoju</th>
+            <th>Data przyjazdu</th>
+            <th>Data wyjazdu</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in participants) {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Surname</td>
+            <td>@item.ContactDetails</td>
+            <td>@item.DormitoryNumber</td>
+            <td>@item.RoomNumber</td>
+            <td>@item.ArrivalDate</td>
+            <td>@item.DepartureDate</td>
+            <td>
+                <a class="btn btn-primary-regular" asp-action="CheckOut" asp-route-id="@item.Id">Wymelduj</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

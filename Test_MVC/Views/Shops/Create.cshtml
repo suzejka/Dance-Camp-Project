@@ -1,0 +1,38 @@
+﻿@model Test_MVC.Models.Shop
+
+@{
+    ViewData["Title"] = "Dodaj nowy sklep";
+}
+
+<h1>Dodaj nowy sklep</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Opis</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div style="display: inline-block">
+                <div class="form-group" style="margin-top: 15px">
+                    <input type="submit" value="Dodaj" class="btn btn-primary-regular" />
+                    <a class="btn btn-danger" asp-action="Index">Anuluj</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
