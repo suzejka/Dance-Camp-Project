@@ -12,9 +12,9 @@ namespace Test_MVC.Models
         public virtual List<Training> Trainings { get; set; }
 
         /// <summary>
-        /// Trainer is able to perform in multiple shows, also none of them
+        /// Trainer is able to perform in multiple shows
         /// </summary>
-        public virtual ICollection<Show>? Shows { get; set; }
+        public virtual ICollection<Show> Shows { get; set; }
 
         /// <summary>
         /// Counts all assigned trainings
@@ -36,6 +36,11 @@ namespace Test_MVC.Models
             } 
 
             return true;
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + Surname;
         }
     }
 }

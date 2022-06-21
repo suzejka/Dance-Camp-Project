@@ -10,87 +10,87 @@ using Test_MVC.Models;
 
 namespace Test_MVC.Controllers
 {
-    public class Open_EventController : Controller
+    public class MusicConsoleOperatorsController : Controller
     {
         private readonly CampDbContext _context;
 
-        public Open_EventController(CampDbContext context)
+        public MusicConsoleOperatorsController(CampDbContext context)
         {
             _context = context;
         }
 
-        // GET: Open_Event
+        // GET: MusicConsoleOperators
         public async Task<IActionResult> Index()
         {
-              return _context.Open_Events != null ? 
-                          View(await _context.Open_Events.ToListAsync()) :
-                          Problem("Entity set 'CampDbContext.Open_Events'  is null.");
+              return _context.MusicConsoleOperator != null ? 
+                          View(await _context.MusicConsoleOperator.ToListAsync()) :
+                          Problem("Entity set 'CampDbContext.MusicConsoleOperator'  is null.");
         }
 
-        // GET: Open_Event/Details/5
+        // GET: MusicConsoleOperators/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Open_Events == null)
+            if (id == null || _context.MusicConsoleOperator == null)
             {
                 return NotFound();
             }
 
-            var open_Event = await _context.Open_Events.Include(s => s.SponsorOpenEvents).ThenInclude(s => s.Sponsor)
+            var musicConsoleOperator = await _context.MusicConsoleOperator
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (open_Event == null)
+            if (musicConsoleOperator == null)
             {
                 return NotFound();
             }
 
-            return View(open_Event);
+            return View(musicConsoleOperator);
         }
 
-        // GET: Open_Event/Create
+        // GET: MusicConsoleOperators/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Open_Event/Create
+        // POST: MusicConsoleOperators/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StreetAddress,MaxAmountOfPeople,Id,Name,Status")] Open_Event open_Event)
+        public async Task<IActionResult> Create([Bind("Id,OwnEquipment,LicenceNumber,Name,Surname,ContactDetails,DormitoryNumber,RoomNumber,ArrivalDate,DepartureDate,AmountOfHoursWorked")] MusicConsoleOperator musicConsoleOperator)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(open_Event);
+                _context.Add(musicConsoleOperator);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(open_Event);
+            return View(musicConsoleOperator);
         }
 
-        // GET: Open_Event/Edit/5
+        // GET: MusicConsoleOperators/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Open_Events == null)
+            if (id == null || _context.MusicConsoleOperator == null)
             {
                 return NotFound();
             }
 
-            var open_Event = await _context.Open_Events.FindAsync(id);
-            if (open_Event == null)
+            var musicConsoleOperator = await _context.MusicConsoleOperator.FindAsync(id);
+            if (musicConsoleOperator == null)
             {
                 return NotFound();
             }
-            return View(open_Event);
+            return View(musicConsoleOperator);
         }
 
-        // POST: Open_Event/Edit/5
+        // POST: MusicConsoleOperators/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StreetAddress,MaxAmountOfPeople,Id,Name,Status")] Open_Event open_Event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OwnEquipment,LicenceNumber,Name,Surname,ContactDetails,DormitoryNumber,RoomNumber,ArrivalDate,DepartureDate,AmountOfHoursWorked")] MusicConsoleOperator musicConsoleOperator)
         {
-            if (id != open_Event.Id)
+            if (id != musicConsoleOperator.Id)
             {
                 return NotFound();
             }
@@ -99,12 +99,12 @@ namespace Test_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(open_Event);
+                    _context.Update(musicConsoleOperator);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!Open_EventExists(open_Event.Id))
+                    if (!MusicConsoleOperatorExists(musicConsoleOperator.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +115,49 @@ namespace Test_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(open_Event);
+            return View(musicConsoleOperator);
         }
 
-        // GET: Open_Event/Delete/5
+        // GET: MusicConsoleOperators/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Open_Events == null)
+            if (id == null || _context.MusicConsoleOperator == null)
             {
                 return NotFound();
             }
 
-            var open_Event = await _context.Open_Events
+            var musicConsoleOperator = await _context.MusicConsoleOperator
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (open_Event == null)
+            if (musicConsoleOperator == null)
             {
                 return NotFound();
             }
 
-            return View(open_Event);
+            return View(musicConsoleOperator);
         }
 
-        // POST: Open_Event/Delete/5
+        // POST: MusicConsoleOperators/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Open_Events == null)
+            if (_context.MusicConsoleOperator == null)
             {
-                return Problem("Entity set 'CampDbContext.Open_Events'  is null.");
+                return Problem("Entity set 'CampDbContext.MusicConsoleOperator'  is null.");
             }
-            var open_Event = await _context.Open_Events.FindAsync(id);
-            if (open_Event != null)
+            var musicConsoleOperator = await _context.MusicConsoleOperator.FindAsync(id);
+            if (musicConsoleOperator != null)
             {
-                _context.Open_Events.Remove(open_Event);
+                _context.MusicConsoleOperator.Remove(musicConsoleOperator);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool Open_EventExists(int id)
+        private bool MusicConsoleOperatorExists(int id)
         {
-          return (_context.Open_Events?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.MusicConsoleOperator?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

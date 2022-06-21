@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,85 +10,87 @@ using Test_MVC.Models;
 
 namespace Test_MVC.Controllers
 {
-    public class TrainingsController : Controller
+    public class Close_EventController : Controller
     {
         private readonly CampDbContext _context;
 
-        public TrainingsController(CampDbContext context)
+        public Close_EventController(CampDbContext context)
         {
             _context = context;
         }
 
-        // GET: Trainings
+        // GET: Close_Event
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Training.Include(t => t.Trainers).ToListAsync());
+              return _context.Close_Event != null ? 
+                          View(await _context.Close_Event.ToListAsync()) :
+                          Problem("Entity set 'CampDbContext.Close_Event'  is null.");
         }
 
-        // GET: Trainings/Details/5
+        // GET: Close_Event/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Close_Event == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training
+            var close_Event = await _context.Close_Event
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (training == null)
+            if (close_Event == null)
             {
                 return NotFound();
             }
 
-            return View(training);
+            return View(close_Event);
         }
 
-        // GET: Trainings/Create
+        // GET: Close_Event/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Trainings/Create
+        // POST: Close_Event/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate")] Training training)
+        public async Task<IActionResult> Create([Bind("Id,Name,Status")] Close_Event close_Event)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(training);
+                _context.Add(close_Event);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(training);
+            return View(close_Event);
         }
 
-        // GET: Trainings/Edit/5
+        // GET: Close_Event/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Close_Event == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training.FindAsync(id);
-            if (training == null)
+            var close_Event = await _context.Close_Event.FindAsync(id);
+            if (close_Event == null)
             {
                 return NotFound();
             }
-            return View(training);
+            return View(close_Event);
         }
 
-        // POST: Trainings/Edit/5
+        // POST: Close_Event/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate")] Training training)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Status")] Close_Event close_Event)
         {
-            if (id != training.Id)
+            if (id != close_Event.Id)
             {
                 return NotFound();
             }
@@ -98,12 +99,12 @@ namespace Test_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(training);
+                    _context.Update(close_Event);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TrainingExists(training.Id))
+                    if (!Close_EventExists(close_Event.Id))
                     {
                         return NotFound();
                     }
@@ -114,41 +115,49 @@ namespace Test_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(training);
+            return View(close_Event);
         }
 
-        // GET: Trainings/Delete/5
+        // GET: Close_Event/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Close_Event == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training
+            var close_Event = await _context.Close_Event
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (training == null)
+            if (close_Event == null)
             {
                 return NotFound();
             }
 
-            return View(training);
+            return View(close_Event);
         }
 
-        // POST: Trainings/Delete/5
+        // POST: Close_Event/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var training = await _context.Training.FindAsync(id);
-            _context.Training.Remove(training);
+            if (_context.Close_Event == null)
+            {
+                return Problem("Entity set 'CampDbContext.Close_Event'  is null.");
+            }
+            var close_Event = await _context.Close_Event.FindAsync(id);
+            if (close_Event != null)
+            {
+                _context.Close_Event.Remove(close_Event);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TrainingExists(int id)
+        private bool Close_EventExists(int id)
         {
-            return _context.Training.Any(e => e.Id == id);
+          return (_context.Close_Event?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

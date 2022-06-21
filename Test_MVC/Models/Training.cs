@@ -13,5 +13,10 @@
         {
             return StartDate + " " + EndDate;
         }
+        
+        public bool CanATrainerBeAdded()
+        {
+            return Trainers.Count < 2;
+        }
     }
 }

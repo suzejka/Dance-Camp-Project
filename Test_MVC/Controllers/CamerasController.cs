@@ -41,7 +41,7 @@ namespace Test_MVC.Controllers
                 return NotFound();
             }
 
-            var camera = await _context.Camera
+            var camera = await _context.Camera.Include(c => c.CameraUsages).ThenInclude(c => c.CameraOperator)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (camera == null)
             {

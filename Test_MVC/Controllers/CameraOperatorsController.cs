@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,85 +10,87 @@ using Test_MVC.Models;
 
 namespace Test_MVC.Controllers
 {
-    public class TrainingsController : Controller
+    public class CameraOperatorsController : Controller
     {
         private readonly CampDbContext _context;
 
-        public TrainingsController(CampDbContext context)
+        public CameraOperatorsController(CampDbContext context)
         {
             _context = context;
         }
 
-        // GET: Trainings
+        // GET: CameraOperators
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Training.Include(t => t.Trainers).ToListAsync());
+              return _context.CameraOperator != null ? 
+                          View(await _context.CameraOperator.ToListAsync()) :
+                          Problem("Entity set 'CampDbContext.CameraOperator'  is null.");
         }
 
-        // GET: Trainings/Details/5
+        // GET: CameraOperators/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.CameraOperator == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training
+            var cameraOperator = await _context.CameraOperator
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (training == null)
+            if (cameraOperator == null)
             {
                 return NotFound();
             }
 
-            return View(training);
+            return View(cameraOperator);
         }
 
-        // GET: Trainings/Create
+        // GET: CameraOperators/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Trainings/Create
+        // POST: CameraOperators/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate")] Training training)
+        public async Task<IActionResult> Create([Bind("Id,LicenceNumber,Name,Surname,ContactDetails,DormitoryNumber,RoomNumber,ArrivalDate,DepartureDate,AmountOfHoursWorked")] CameraOperator cameraOperator)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(training);
+                _context.Add(cameraOperator);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(training);
+            return View(cameraOperator);
         }
 
-        // GET: Trainings/Edit/5
+        // GET: CameraOperators/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.CameraOperator == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training.FindAsync(id);
-            if (training == null)
+            var cameraOperator = await _context.CameraOperator.FindAsync(id);
+            if (cameraOperator == null)
             {
                 return NotFound();
             }
-            return View(training);
+            return View(cameraOperator);
         }
 
-        // POST: Trainings/Edit/5
+        // POST: CameraOperators/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate")] Training training)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LicenceNumber,Name,Surname,ContactDetails,DormitoryNumber,RoomNumber,ArrivalDate,DepartureDate,AmountOfHoursWorked")] CameraOperator cameraOperator)
         {
-            if (id != training.Id)
+            if (id != cameraOperator.Id)
             {
                 return NotFound();
             }
@@ -98,12 +99,12 @@ namespace Test_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(training);
+                    _context.Update(cameraOperator);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TrainingExists(training.Id))
+                    if (!CameraOperatorExists(cameraOperator.Id))
                     {
                         return NotFound();
                     }
@@ -114,41 +115,49 @@ namespace Test_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(training);
+            return View(cameraOperator);
         }
 
-        // GET: Trainings/Delete/5
+        // GET: CameraOperators/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.CameraOperator == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training
+            var cameraOperator = await _context.CameraOperator
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (training == null)
+            if (cameraOperator == null)
             {
                 return NotFound();
             }
 
-            return View(training);
+            return View(cameraOperator);
         }
 
-        // POST: Trainings/Delete/5
+        // POST: CameraOperators/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var training = await _context.Training.FindAsync(id);
-            _context.Training.Remove(training);
+            if (_context.CameraOperator == null)
+            {
+                return Problem("Entity set 'CampDbContext.CameraOperator'  is null.");
+            }
+            var cameraOperator = await _context.CameraOperator.FindAsync(id);
+            if (cameraOperator != null)
+            {
+                _context.CameraOperator.Remove(cameraOperator);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TrainingExists(int id)
+        private bool CameraOperatorExists(int id)
         {
-            return _context.Training.Any(e => e.Id == id);
+          return (_context.CameraOperator?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

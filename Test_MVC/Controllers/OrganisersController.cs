@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,85 +10,87 @@ using Test_MVC.Models;
 
 namespace Test_MVC.Controllers
 {
-    public class TrainingsController : Controller
+    public class OrganisersController : Controller
     {
         private readonly CampDbContext _context;
 
-        public TrainingsController(CampDbContext context)
+        public OrganisersController(CampDbContext context)
         {
             _context = context;
         }
 
-        // GET: Trainings
+        // GET: Organisers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Training.Include(t => t.Trainers).ToListAsync());
+              return _context.Organiser != null ? 
+                          View(await _context.Organiser.ToListAsync()) :
+                          Problem("Entity set 'CampDbContext.Organiser'  is null.");
         }
 
-        // GET: Trainings/Details/5
+        // GET: Organisers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Organiser == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training
+            var organiser = await _context.Organiser
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (training == null)
+            if (organiser == null)
             {
                 return NotFound();
             }
 
-            return View(training);
+            return View(organiser);
         }
 
-        // GET: Trainings/Create
+        // GET: Organisers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Trainings/Create
+        // POST: Organisers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate")] Training training)
+        public async Task<IActionResult> Create([Bind("WorkSector,Id,Name,Surname,ContactDetails,DormitoryNumber,RoomNumber,ArrivalDate,DepartureDate,AmountOfHoursWorked")] Organiser organiser)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(training);
+                _context.Add(organiser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(training);
+            return View(organiser);
         }
 
-        // GET: Trainings/Edit/5
+        // GET: Organisers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Organiser == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training.FindAsync(id);
-            if (training == null)
+            var organiser = await _context.Organiser.FindAsync(id);
+            if (organiser == null)
             {
                 return NotFound();
             }
-            return View(training);
+            return View(organiser);
         }
 
-        // POST: Trainings/Edit/5
+        // POST: Organisers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate")] Training training)
+        public async Task<IActionResult> Edit(int id, [Bind("WorkSector,Id,Name,Surname,ContactDetails,DormitoryNumber,RoomNumber,ArrivalDate,DepartureDate,AmountOfHoursWorked")] Organiser organiser)
         {
-            if (id != training.Id)
+            if (id != organiser.Id)
             {
                 return NotFound();
             }
@@ -98,12 +99,12 @@ namespace Test_MVC.Controllers
             {
                 try
                 {
-                    _context.Update(training);
+                    _context.Update(organiser);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TrainingExists(training.Id))
+                    if (!OrganiserExists(organiser.Id))
                     {
                         return NotFound();
                     }
@@ -114,41 +115,49 @@ namespace Test_MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(training);
+            return View(organiser);
         }
 
-        // GET: Trainings/Delete/5
+        // GET: Organisers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Organiser == null)
             {
                 return NotFound();
             }
 
-            var training = await _context.Training
+            var organiser = await _context.Organiser
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (training == null)
+            if (organiser == null)
             {
                 return NotFound();
             }
 
-            return View(training);
+            return View(organiser);
         }
 
-        // POST: Trainings/Delete/5
+        // POST: Organisers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var training = await _context.Training.FindAsync(id);
-            _context.Training.Remove(training);
+            if (_context.Organiser == null)
+            {
+                return Problem("Entity set 'CampDbContext.Organiser'  is null.");
+            }
+            var organiser = await _context.Organiser.FindAsync(id);
+            if (organiser != null)
+            {
+                _context.Organiser.Remove(organiser);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TrainingExists(int id)
+        private bool OrganiserExists(int id)
         {
-            return _context.Training.Any(e => e.Id == id);
+          return (_context.Organiser?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

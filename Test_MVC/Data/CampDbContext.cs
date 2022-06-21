@@ -51,5 +51,11 @@ namespace Test_MVC.Data
             .HasMany(c => c.SponsorOpenEvents)
             .WithOne(c => c.OpenEvent);
         }
+
+        public DbSet<Test_MVC.Models.Close_Event>? Close_Event { get; set; }
+
+        public DbSet<Test_MVC.Models.CameraOperator>? CameraOperator { get; set; }
+
+        public DbSet<Test_MVC.Models.MusicConsoleOperator>? MusicConsoleOperator { get; set; }
     }
 }

@@ -20,7 +20,22 @@ namespace Test_MVC.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult OtherOptions()
+        {
+            return View();
+        }
+
+        public IActionResult Events()
+        {
+            return View();
+        }
+
+        public IActionResult Employees()
+        {
+            return View();
+        }
+
+        public IActionResult Operators()
         {
             return View();
         }

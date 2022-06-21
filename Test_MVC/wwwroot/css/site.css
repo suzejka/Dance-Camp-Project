@@ -5,6 +5,16 @@ body {
     margin-top: 20px;
 }
 
+.centeredButtons {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 50vh;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .sidenav {
     height: 100%;
     width: 0;
