@@ -6,10 +6,7 @@
 
 <h1>Otwarte wydarzenia</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table id="openEventsTable" class="hover display">
     <thead>
         <tr>
             <th>
@@ -25,18 +22,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Name)<a asp-controller="Open_Event" asp-action="Details" asp-route-id="@item.Id"><img src='~/details.svg' width="16" height="16"></a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => @item.Status)
             </td>
             <td>
-                <a asp-controller="SponsorOpenEvents" asp-action="Create" ViewBag.OpenEventId="@item.Id">Sponsoruj</a>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                @*<a asp-controller="SponsorOpenEvents" asp-action="Create" ViewBag.OpenEventId="@item.Id">Sponsoruj</a>*@
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |*@
+                @*<a class="btn btn-primary-regular" asp-action="Shows" asp-route-id="@item.Id">Pokazy</a>*@
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">X</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-primary-regular" asp-action="Create">Dodaj</a>
+</p>

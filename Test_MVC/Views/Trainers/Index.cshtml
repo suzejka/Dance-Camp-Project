@@ -6,9 +6,6 @@
 
 <h1>Trenerzy</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table id="trainersTable" class="hover display">
     <thead>
         <tr>
@@ -34,16 +31,19 @@
             <td>
                     @if (item.CanTrainingBeAssigned())
                     {
-                        <a asp-controller="Trainers" asp-action="AssignTraining" >Przypisz trening</a>
+                        <a class="btn btn-primary-regular" asp-controller="Trainers" asp-action="AssignTraining" >Przypisz trening</a>
                     }
                 
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-primary-regular" asp-action="Create">Dodaj</a>
+</p>

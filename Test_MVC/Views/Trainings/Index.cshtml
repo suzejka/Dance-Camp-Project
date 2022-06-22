@@ -6,9 +6,6 @@
 
 <h1>Treningi</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -36,13 +33,13 @@
             <td>
                     @foreach(var trainer in item.Trainers)
                     {
-                        <a asp-controller="Trainers" asp-action="Details" asp-route-id="@trainer.Id" > @trainer </a><br>
+                        <a aria-disabled="true" asp-controller="Trainers" asp-action="Details" asp-route-id="@trainer.Id" > @trainer </a><br>
                     }
              </td>
              <td>
                     @if (item.CanTrainerBeAssigned())
                     {
-                        <a asp-controller="Trainers" asp-action="AssignTraining" >Przypisz trenera</a>
+                        <a class="btn btn-primary-regular" asp-controller="Trainers" asp-action="AssignTraining" >Przypisz trenera</a>
                     }
                 
             </td>
@@ -50,3 +47,6 @@
 }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-primary-regular" asp-action="Create">Dodaj</a>
+</p>

@@ -1,0 +1,37 @@
+﻿@*@model Test_MVC.Models.Open_Event
+
+@{
+    ViewData["Title"] = "Pokazy " + @Model;
+}
+
+<h1>Pokazy wydarzenia @Model</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            Czas trwania
+        </dt>
+        @foreach (var s in @Model.Shows)
+        {
+            <dd class = "col-sm-8">
+                @s.Duration
+            </dd>
+        }
+        <dt class = "col-sm-4">
+            Występują
+        </dt>
+        @foreach (var s in @Model.Shows)
+        {<dd class = "col-sm-8">
+            @foreach(var t in @s.Trainers)
+            {
+                    @t.Name @t.Surname;
+                }
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary-regular" asp-action="Index">Wróć do listy otwartych wydarzeń</a>
+</div>
+*@

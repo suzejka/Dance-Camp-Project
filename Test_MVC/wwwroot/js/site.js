@@ -53,10 +53,27 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('#operatorsTable').DataTable({
+    $('#cameraOperatorsTable').DataTable({
         paging: true,
         searching: true,
         ordering: true,
+        "info": false,
+        dom: '<"top"f>rt<"bottom"p><"clear">',
+        "pageLength": 5,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pl.json"
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#musicConsoleOperatorsTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        "info": false,
+        dom: '<"top"f>rt<"bottom"p><"clear">',
+        "pageLength": 5,
         "language": {
             "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pl.json"
         }
@@ -115,3 +132,33 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $('#sponsorsTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        "info": false,
+        dom: '<"top"f>rt<"bottom"p><"clear">',
+        "pageLength": 5,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pl.json"
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#camerasTable').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        "info": false,
+        dom: '<"top"f>rt<"bottom"p><"clear">',
+        "pageLength": 5,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/pl.json"
+        }
+    });
+});
+
+ 

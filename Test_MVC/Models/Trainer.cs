@@ -4,8 +4,6 @@ namespace Test_MVC.Models
 {
     public class Trainer : Person
     {
-        public static int MaximumNumberOfClasses = 3;
-
         /// <summary>
         /// List of assigned tranings (max. 3)
         /// </summary>
@@ -15,6 +13,8 @@ namespace Test_MVC.Models
         /// Trainer is able to perform in multiple shows
         /// </summary>
         public virtual ICollection<Show> Shows { get; set; }
+        
+        public static int MaximumNumberOfClasses = 3;
 
         /// <summary>
         /// Checks if the amount of assigned training is above the limit
@@ -22,6 +22,10 @@ namespace Test_MVC.Models
         /// <returns>False or True</returns>
         public bool CanTrainingBeAssigned()
         {
+            if (Trainings == null)
+            {
+                return true;
+            }
             return Trainings.Count < MaximumNumberOfClasses;
         }
         

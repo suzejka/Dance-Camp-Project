@@ -1,46 +1,28 @@
 ﻿@model IEnumerable<Test_MVC.Models.MusicConsoleOperator>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Operatorzy konsoli muzycznych";
 }
 
-<h1>Index</h1>
+<h1>Operatorzy konsoli muzycznych</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table id="musicConsoleOperatorsTable" class="hover display">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OwnEquipment)
+                Imię
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LicenceNumber)
+                Nazwisko
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Kontakt
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Surname)
+                Numer licencji
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactDetails)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DormitoryNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArrivalDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartureDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AmountOfHoursWorked)
+                Ma własny sprzęt
             </th>
             <th></th>
         </tr>
@@ -48,12 +30,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OwnEquipment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LicenceNumber)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -64,19 +40,10 @@
                 @Html.DisplayFor(modelItem => item.ContactDetails)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DormitoryNumber)
+                @Html.DisplayFor(modelItem => item.LicenceNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AmountOfHoursWorked)
+                @Html.DisplayFor(modelItem => item.OwnEquipment)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -87,3 +54,6 @@
 }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-primary-regular" asp-action="Create">Dodaj</a>
+</p>
