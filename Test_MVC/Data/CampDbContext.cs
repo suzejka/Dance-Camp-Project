@@ -28,6 +28,7 @@ namespace Test_MVC.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<Sponsor> Sponsor { get; set; }
         public DbSet<Event> Event { get; set; }
+        public DbSet<Room> Room { get; set; }
         public DbSet<Open_Event> Open_Events { get; set; }
         public DbSet<SponsorOpenEvent> SponsorOpenEvents { get; set; }
 

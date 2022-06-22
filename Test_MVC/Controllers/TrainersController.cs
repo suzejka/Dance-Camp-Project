@@ -45,8 +45,47 @@ namespace Test_MVC.Controllers
             return View(trainer);
         }
 
-        // GET: Trainers/Create
-        public IActionResult Create()
+        public async Task<IActionResult> AssignTraining(int? id)
+        {
+            if (id == null || _context.Trainer == null)
+            {
+                return NotFound();
+            }
+
+            var trainer = await _context.Trainer.FindAsync(id);
+            if (trainer == null)
+            {
+                return NotFound();
+            }
+            return View(trainer);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignTraining(Trainer trainer, Training training)
+        {
+            var room = _context.Room.Where(r => r.Id == 1).FirstOrDefault();
+            if (trainer.CanTrainingBeAssigned())
+            {
+                Training t = new Training
+                {
+                    Name = "test",
+                    Status = Status_Name.Scheduled,
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddMinutes(90),
+                    Room = room
+                };
+                trainer.Trainings.Add(training);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+            // GET: Trainers/Create
+            public IActionResult Create()
         {
             return View();
         }

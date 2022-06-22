@@ -32,7 +32,11 @@
                 @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
-                <a href="#">Przypisz trening</a>
+                    @if (item.CanTrainingBeAssigned())
+                    {
+                        <a asp-controller="Trainers" asp-action="AssignTraining" >Przypisz trening</a>
+                    }
+                
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

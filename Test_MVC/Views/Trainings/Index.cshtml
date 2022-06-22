@@ -21,6 +21,7 @@
             <th>
                 Trenerzy
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -38,6 +39,13 @@
                         <a asp-controller="Trainers" asp-action="Details" asp-route-id="@trainer.Id" > @trainer </a><br>
                     }
              </td>
+             <td>
+                    @if (item.CanTrainerBeAssigned())
+                    {
+                        <a asp-controller="Trainers" asp-action="AssignTraining" >Przypisz trenera</a>
+                    }
+                
+            </td>
         </tr>
 }
     </tbody>

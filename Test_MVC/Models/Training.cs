@@ -8,15 +8,17 @@
         public virtual ICollection<Trainer> Trainers { get; set; }
         public virtual Room Room { get; set; }
 
+        public static int MaximumAmountOfTrainers = 2;
+
 
         public override string ToString()
         {
             return StartDate + " " + EndDate;
         }
         
-        public bool CanATrainerBeAdded()
+        public bool CanTrainerBeAssigned()
         {
-            return Trainers.Count < 2;
+            return Trainers.Count < MaximumAmountOfTrainers;
         }
     }
 }
