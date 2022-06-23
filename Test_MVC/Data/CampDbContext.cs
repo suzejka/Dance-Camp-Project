@@ -58,5 +58,7 @@ namespace Test_MVC.Data
         public DbSet<Test_MVC.Models.CameraOperator>? CameraOperator { get; set; }
 
         public DbSet<Test_MVC.Models.MusicConsoleOperator>? MusicConsoleOperator { get; set; }
+
+        public DbSet<Test_MVC.Models.ParticipantVolunteerPerson>? ParticipantVolunteerPerson { get; set; }
     }
 }

@@ -1,15 +1,8 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-
-namespace Test_MVC.Models
+﻿namespace Test_MVC.Models
 {
-    public class Person
+    public enum PersonType { Participant, Volunteer }
+    public class ParticipantVolunteerPerson : Person
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string ContactDetails { get; set; }
-
         #region Participant properties
 
         public int? DormitoryNumber { get; set; }
@@ -28,12 +21,12 @@ namespace Test_MVC.Models
         /// <summary>
         /// Overlapping - Participant and Volunteer
         /// </summary>
-       // public List<PersonType>? personTypes = new();
+        public List<PersonType> personTypes = new();
 
         /// <summary>
         /// Person takes part in many events 
         /// </summary>
-        //public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event>? Events { get; set; }
 
     }
 }

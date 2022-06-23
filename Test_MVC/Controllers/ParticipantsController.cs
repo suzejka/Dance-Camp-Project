@@ -18,7 +18,7 @@ namespace Test_MVC.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            ViewData["Participants"] = _context.Person.ToList().Where(e => e.personTypes.Contains(Models.PersonType.Participant));
+            //ViewData["Participants"] = _context.Person.ToList().Where(e => e.personTypes.Contains(Models.PersonType.Participant));
             return View();
         }
 
@@ -41,7 +41,7 @@ namespace Test_MVC.Controllers
         {
             try
             {
-                person.personTypes.Add(PersonType.Participant);
+                //person.personTypes.Add(PersonType.Participant);
                 return RedirectToAction(nameof(Index));
             }
             catch

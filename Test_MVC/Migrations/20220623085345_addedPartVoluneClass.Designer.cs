@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test_MVC.Data;
 
@@ -11,9 +12,10 @@ using Test_MVC.Data;
 namespace Test_MVC.Migrations
 {
     [DbContext(typeof(CampDbContext))]
-    partial class CampDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220623085345_addedPartVoluneClass")]
+    partial class addedPartVoluneClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace Test_MVC.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("EventParticipantVolunteerPerson", b =>
-                {
-                    b.Property<int>("EventsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ParticipantsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EventsId", "ParticipantsId");
-
-                    b.HasIndex("ParticipantsId");
-
-                    b.ToTable("EventParticipantVolunteerPerson");
-                });
 
             modelBuilder.Entity("ShowTrainer", b =>
                 {
@@ -165,6 +152,9 @@ namespace Test_MVC.Migrations
                     b.Property<int?>("DormitoryNumber")
                         .HasColumnType("int");
 
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -177,6 +167,8 @@ namespace Test_MVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
 
                     b.ToTable("Person");
 
@@ -353,13 +345,6 @@ namespace Test_MVC.Migrations
                     b.HasDiscriminator().HasValue("Organiser");
                 });
 
-            modelBuilder.Entity("Test_MVC.Models.ParticipantVolunteerPerson", b =>
-                {
-                    b.HasBaseType("Test_MVC.Models.Person");
-
-                    b.HasDiscriminator().HasValue("ParticipantVolunteerPerson");
-                });
-
             modelBuilder.Entity("Test_MVC.Models.Trainer", b =>
                 {
                     b.HasBaseType("Test_MVC.Models.Person");
@@ -402,21 +387,6 @@ namespace Test_MVC.Migrations
                     b.HasDiscriminator().HasValue("MusicConsoleOperator");
                 });
 
-            modelBuilder.Entity("EventParticipantVolunteerPerson", b =>
-                {
-                    b.HasOne("Test_MVC.Models.Event", null)
-                        .WithMany()
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Test_MVC.Models.ParticipantVolunteerPerson", null)
-                        .WithMany()
-                        .HasForeignKey("ParticipantsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ShowTrainer", b =>
                 {
                     b.HasOne("Test_MVC.Models.Event+Show", null)
@@ -449,6 +419,13 @@ namespace Test_MVC.Migrations
                     b.Navigation("Camera");
 
                     b.Navigation("CameraOperator");
+                });
+
+            modelBuilder.Entity("Test_MVC.Models.Person", b =>
+                {
+                    b.HasOne("Test_MVC.Models.Event", null)
+                        .WithMany("Participants")
+                        .HasForeignKey("EventId");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Product", b =>
@@ -508,6 +485,11 @@ namespace Test_MVC.Migrations
             modelBuilder.Entity("Test_MVC.Models.Camera", b =>
                 {
                     b.Navigation("CameraUsages");
+                });
+
+            modelBuilder.Entity("Test_MVC.Models.Event", b =>
+                {
+                    b.Navigation("Participants");
                 });
 
             modelBuilder.Entity("Test_MVC.Models.Room", b =>

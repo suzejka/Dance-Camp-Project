@@ -13,7 +13,7 @@
         public string Name { get; set; }
         public Status_Name Status { get; set; }
         public List<Show> Shows = new();
-        public virtual ICollection<Person> Participants { get; set; }
+        public virtual ICollection<ParticipantVolunteerPerson>? Participants { get; set; }
 
 
         public void Cancel()
